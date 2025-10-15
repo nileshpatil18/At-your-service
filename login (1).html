@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two Forms with Header Image & Login Modal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f3f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      background: #fff;
+      padding: 20px 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    header img {
+      max-width: 400px; 
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .forms-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+      flex-wrap: wrap; 
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      width: 320px;
+      position: relative;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #444;
+    }
+
+    .form-container label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .form-container input,
+    .form-container textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      box-sizing: border-box;
+      background: #f8f8fc;
+      transition: border-color 0.2s;
+    }
+
+    .form-container input:focus,
+    .form-container textarea:focus {
+      border-color: #6c63ff;
+    }
+
+    .form-container textarea {
+      resize: vertical;
+      min-height: 70px;
+      max-height: 180px;
+      font-family: inherit;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 12px;
+      background: #6c63ff;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .form-container button:hover {
+      background: #574fd6;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .login-link a {
+      font-size: 13px;
+      color: grey;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    .modal-bg {
+      display: none;  
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(6px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 12px;
+      width: 380px;
+      max-width: 90%;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    .modal h2 {
+      margin: 0 0 15px;
+      text-align: center;
+      color: #444;
+    }
+
+    .modal label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .modal input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .modal button {
+      width: 100%;
+      padding: 12px;
+      background: #6c63ff;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .modal button:hover {
+      background: #574fd6;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #888;
+      cursor: pointer;
+    }
+    .close-btn:hover {
+      color: #000;
+    }
+
+    @media (max-width: 768px) {
+      .forms-wrapper {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="a.png" alt="Header Image">
+  </header>
+
+  <!-- Forms -->
+  <div class="forms-wrapper">
+    
+    <!-- User Form -->
+    <div class="form-container">
+      <h2>User</h2>
+      <form id="registerForm">
+        <label for="username1">Username</label>
+        <input type="text" id="username1" name="username" placeholder="Choose a username" required>
+
+        <label for="password1">Password</label>
+        <input type="password" id="password1" name="password" placeholder="Choose a password" required>
+
+        <label for="email1">Email</label>
+        <input type="email" id="email1" name="email" placeholder="Your email" required>
+
+        <label for="phone1">Phone</label>
+        <input type="tel" id="phone1" name="phone" placeholder="Your phone number" required>
+
+        <label for="address1">Address</label>
+        <textarea id="address1" name="address" placeholder="Your address" required></textarea>
+
+        <button type="submit">Register</button>
+      </form>
+      <div class="login-link">
+        <a onclick="openModal()">Log In</a>
+      </div>
+    </div>
+
+    <!-- Service Provider Form -->
+    <div class="form-container">
+      <h2>Service Provider</h2>
+      <form id="providerRegisterForm">
+        <label for="providerUsername">Username</label>
+        <input type="text" id="providerUsername" name="username" placeholder="Choose a username" required>
+
+        <label for="providerPassword">Password</label>
+        <input type="password" id="providerPassword" name="password" placeholder="Choose a password" required>
+
+        <label for="providerEmail">Email</label>
+        <input type="email" id="providerEmail" name="email" placeholder="Your email" required>
+
+        <label for="providerPhone">Phone</label>
+        <input type="tel" id="providerPhone" name="phone" placeholder="Your phone number" required>
+
+        <label for="providerAddress">Address</label>
+        <textarea id="providerAddress" name="address" placeholder="Your address" required></textarea>
+
+        <button type="submit">Register</button>
+      </form>
+      <div class="login-link">
+        <a onclick="openModal()">Log In</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal-bg" id="loginModal">
+    <div class="modal">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2>Login</h2>
+      <form id="loginForm">
+        <label for="loginUsername">Username</label>
+        <input type="text" id="loginUsername" name="username" placeholder="Your username" required>
+
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" name="password" placeholder="Your password" required>
+
+        <button type="submit">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function openModal() {
+      document.getElementById("loginModal").style.display = "flex";
+    }
+    function closeModal() {
+      document.getElementById("loginModal").style.display = "none";
+    }
+    window.onclick = function(event) {
+      const modal = document.getElementById("loginModal");
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // Registration form handler (User)
+    document.getElementById('registerForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username1').value;
+      const password = document.getElementById('password1').value;
+      const email = document.getElementById('email1').value;
+      const phone = document.getElementById('phone1').value;
+      const address = document.getElementById('address1').value;
+      const res = await fetch('http://localhost:3001/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password, email, phone, address, role: 'user' })
+      });
+      const data = await res.json();
+      alert(data.message);
+      if (res.ok) {
+        openModal();
+          localStorage.setItem('username', username);
+          localStorage.setItem('email', email || '');
+          localStorage.setItem('phone', phone || '');
+          localStorage.setItem('address', address || '');
+          localStorage.setItem('role', 'user');
+      }
+    });
+
+    // Registration form handler (Service Provider)
+    document.getElementById('providerRegisterForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const username = document.getElementById('providerUsername').value;
+      const password = document.getElementById('providerPassword').value;
+      const email = document.getElementById('providerEmail').value;
+      const phone = document.getElementById('providerPhone').value;
+      const address = document.getElementById('providerAddress').value;
+      const res = await fetch('http://localhost:3001/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password, email, phone, address, role: 'provider' })
+      });
+      const data = await res.json();
+      alert(data.message);
+      if (res.ok) {
+        openModal();
+          localStorage.setItem('username', username);
+          localStorage.setItem('email', email || '');
+          localStorage.setItem('phone', phone || '');
+          localStorage.setItem('address', address || '');
+          localStorage.setItem('role', 'provider');
+      }
+    });
+
+    // Login form handler
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+      const res = await fetch('http://localhost:3001/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      const data = await res.json();
+      alert(data.message);
+        if (res.ok) {
+          localStorage.setItem('username', username);
+          localStorage.setItem('email', data.email || '');
+          localStorage.setItem('phone', data.phone || '');
+          localStorage.setItem('address', data.address || '');
+          localStorage.setItem('role', data.role || 'user');
+          window.location.href = 'home.html';
+        }
+    });
+  </script>
+
+</body>
+</html>
+

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Services</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="homestyle.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav style="position: relative;">
+    <div class="logo">
+      <img src="logo.png" alt="Your Service Logo">
+      <span class="logo-text">At Your Service</span>
+    </div>
+    <ul>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#blog">Our Blog</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div id="userIcon" style="position: absolute; top: 18px; right: 30px; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+      <i class="fas fa-user-circle" id="accountIcon" style="font-size: 1.3rem; color: #6c63ff; cursor: pointer;" title="Account"></i>
+      <span id="usernameDisplay" style="font-size: 0.95rem; color: #fff; font-weight: 500; margin-top: 2px;"></span>
+      <div id="accountPopup" style="display:none; position:absolute; top:38px; right:0; background:#fff; color:#333; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.15); min-width:180px; z-index:1001; padding:16px 18px;">
+        <div style="font-weight:600; margin-bottom:8px;">Account Details</div>
+        <div id="accountDetails" style="font-size:0.95rem; margin-bottom:12px;"></div>
+        <button id="logoutBtn" style="background:#6c63ff; color:#fff; border:none; border-radius:6px; padding:6px 18px; cursor:pointer; font-size:0.95rem;">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Need improvement or repair for your home? We can help!</h1>
+      <p>✔ Free Quotes  ✔ 100% Commitment-Free</p>
+      <button onclick="window.location.href='order.html'">Order Now</button>
+    </div>
+    <img src="head.png.png" alt="Home improvement and repair services">
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="about-text">
+      <h2><i class="fas fa-tools"></i> Professional for your home services</h2>
+      <p>You need <strong>help at home</strong>? We’re here to serve you with <span class="highlight">professional solutions</span> for your repairs and improvements.</p>
+      <ul>
+        <li>Repair and Installation</li>
+        <li>Plumbing</li>
+        <li>Maintenance</li>
+        <li>Budget-friendly</li>
+        <li>Home Security Services</li>
+        <li>Eco-friendly solutions</li>
+      </ul>
+    </div>
+    <img src="home2.png.png" alt="Professional home services">
+  </section>
+
+  <!-- Services Section -->
+  <section class="services" id="services">
+    <h2>Our Services</h2>
+    <div class="service-grid">
+      
+      <div class="service-card" onclick="window.location.href='plumbing.html'">
+        <h3>Plumbing Services</h3>
+        <p>Pipe replacement, leak detection, clogged pipes & more.</p>
+      </div>
+      
+      <div class="service-card" onclick="window.location.href='roofing.html'">
+        <h3>Roofing Repair</h3>
+        <p>Fix damaged shingles, roof replacement, and maintenance.</p>
+      </div>
+      
+      <div class="service-card" onclick="window.location.href='carpenter.html'">
+        <h3>Carpenter Services</h3>
+        <p>Woodwork, repairs, custom furniture, and installation.</p>
+      </div>
+      
+      <div class="service-card" onclick="window.location.href='trimming.html'">
+        <h3>Tree Trimming</h3>
+        <p>Landscaping, tree maintenance, and seasonal trimming.</p>
+      </div>
+      
+      <div class="service-card" onclick="window.location.href='appliance.html'">
+        <h3>Appliance Repair</h3>
+        <p>Repair of washing machines, refrigerators, AC & more.</p>
+      </div>
+      
+      <div class="service-card" onclick="window.location.href='bath.html'">
+        <h3>Bathroom Remodeling</h3>
+        <p>Upgrade tiles, fittings, and complete bathroom renovation.</p>
+      </div>
+      
+      <div class="service-card" onclick="window.location.href='lock.html'">
+        <h3>Locksmith</h3>
+        <p>Door locks, digital locks, emergency lock opening.</p>
+      </div>
+    
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta" id="contact">
+    <h2>Need urgent service? We are ready 24/7!</h2>
+    <button onclick="window.location.href='contact.html'">Call Us Now</button>
+  </section>
+
+  <script>
+    // Display username from localStorage if available
+    const username = localStorage.getItem('username');
+    if (username) {
+      document.getElementById('usernameDisplay').textContent = username;
+    }
+
+    // Show account details popup on icon click
+    document.getElementById('accountIcon').onclick = function(e) {
+      e.stopPropagation();
+      const popup = document.getElementById('accountPopup');
+      if (popup.style.display === 'none' || popup.style.display === '') {
+        // Fill account details
+        let details = `<strong>Username:</strong> ${username}`;
+        document.getElementById('accountDetails').innerHTML = details;
+        popup.style.display = 'block';
+      } else {
+        popup.style.display = 'none';
+      }
+    };
+
+    // Hide popup when clicking outside
+    document.body.onclick = function(e) {
+      const popup = document.getElementById('accountPopup');
+      if (popup && popup.style.display === 'block') {
+        popup.style.display = 'none';
+      }
+    };
+
+    // Prevent popup from closing when clicking inside
+    document.getElementById('accountPopup').onclick = function(e) {
+      e.stopPropagation();
+    };
+
+    // Logout button
+    document.getElementById('logoutBtn').onclick = function() {
+      localStorage.removeItem('username');
+      window.location.href = 'login (1).html';
+    };
+  </script>
+</body>
+</html>

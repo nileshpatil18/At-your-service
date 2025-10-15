@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Place Your Order | At Your Service</title>
+  <link rel="stylesheet" href="servicestyle.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-logo">At Your Service</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  
+  <section class="order-form-section">
+    <h2>Service Booking Form</h2>
+    <form class="order-form" onsubmit="return confirmBooking(event)">
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="+91..." required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Full Address</label>
+        <textarea id="address" name="address" rows="3" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="serviceDate">Preferred Service Date</label>
+        <input type="date" id="serviceDate" name="serviceDate" required>
+      </div>
+
+      <div class="form-group">
+        <label for="timeSlot">Preferred Time Slot</label>
+        <select id="timeSlot" name="timeSlot" required>
+          <option value="">--Select Time--</option>
+          <option value="Morning (8am-11am)">Morning (8am - 11am)</option>
+          <option value="Afternoon (12pm-3pm)">Afternoon (12pm - 3pm)</option>
+          <option value="Evening (4pm-7pm)">Evening (4pm - 7pm)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="additionalInfo">Additional Instructions (optional)</label>
+        <textarea id="additionalInfo" name="additionalInfo" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="book-btn">Confirm Booking</button>
+    </form>
+  </section>
+
+  <script>
+    // Example: dynamically set provider from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const provider = urlParams.get('provider');
+    if (provider) {
+      document.getElementById('provider-name').textContent = provider;
+    }
+
+    function confirmBooking(event) {
+      event.preventDefault();
+      alert("✅ Your service has been successfully booked! We’ll contact you shortly.");
+      event.target.reset();
+    }
+  </script>
+</body>
+</html>
